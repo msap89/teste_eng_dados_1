@@ -101,8 +101,9 @@ Os testes unitários são fundamentais para garantir a robustez e confiabilidade
 
 ### 6. Infra as Code
 #### Descrição
-- Baseado no script que voce desenvolveu na etapa de ETL desenvolva um script em Terraform que crie um Glue Job que irá rodar o script. Abaixo alguns parametros que o serviço deve ter.
+- Baseado no script que voce desenvolveu na etapa de ETL desenvolva um script Terraform que crie um Glue Job. Abaixo alguns parametros que o serviço deve ter.
 - Parametros
+  - Script : script desenvolvido na etapa 2
   - Versao: 5
   - Workers: 10
   - Tipo de Maquina: G1x
