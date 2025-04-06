@@ -12,6 +12,9 @@ O teste é destinado a avaliar as habilidades práticas como Engenheir@ de dados
 5. Desenvolvimento de testes unitários
 6. Infra as Code (IaC)
 
+## Fork
+Realize um fork do repositorio e após a conclusão submeta um pull request. Através do PR que as respostas serão revisadas.
+
 ## Sugestão de estrutura dos arquivos de resposta
 ```bash
 ├── 1.ETL/
