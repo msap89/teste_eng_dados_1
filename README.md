@@ -35,7 +35,7 @@ Disponibilizamos também um docker compose para criação de um ambiente spark p
 
 ## Desafios
 
-### 1. ETL e Modelagem
+### 1. ETL
 
 #### Descrição
 
