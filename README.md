@@ -12,7 +12,7 @@ O teste é destinado a avaliar as habilidades práticas como Engenheir@ de dados
 5. Desenvolvimento de testes unitários
 6. Infra as Code (IaC)
 
-# Sugestão de estrutura dos arquivos de resposta
+## Sugestão de estrutura dos arquivos de resposta
 ```bash
 ├── 1.ETL/
 │   └── script.py
@@ -30,6 +30,8 @@ O teste é destinado a avaliar as habilidades práticas como Engenheir@ de dados
     └── script.tf
  ```
 
+## Docker
+Disponibilizamos também um docker compose para criação de um ambiente spark para desenvolvimento na própria maquina, a utilização não é obrigatória.
 
 ## Desafios
 
