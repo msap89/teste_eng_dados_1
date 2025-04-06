@@ -53,6 +53,7 @@ Passos:
 - Deduplique o dataset mantendo sempre somente a ultima data de atualizacao do cadastro de cada cliente 
 - Trate a coluna de telefone de modo a permitir somente valores que sigam o padrao (NN)NNNNN-NNNN os demais devem ficar nulos
 - Realize a escrita do dado no bucket s3://bucket-silver/tb_cliente
+---
 
 ### 2. Análise dos dados
 
@@ -61,7 +62,7 @@ Utilize o arquivo `clientes_sinteticos.csv`.
 
 - Identifique os 5 clientes que mais sofreram atuaatualizações na base.
 - Calcule a média de idade dos clientes.
-
+---
 
 ### 3. Desenho de Arquitetura
 
@@ -72,7 +73,7 @@ Proponha uma arquitetura na AWS para coletar dados de cadastros de clientes em u
 - Desenhe um sistema para coletar dados do banco MySQL realizando CDC.
 - O processamento e escrita deve ser projetado para os 3 niveis do lake (bronze, silver e gold)
 - Além do armazenamento do dado será necessaria uma governança de acesso a nivel de usuario
-
+---
 
 ### 4. Data Quality
 
@@ -98,7 +99,7 @@ Os testes unitários são fundamentais para garantir a robustez e confiabilidade
 - Utilize uma biblioteca de testes de sua escolha (como `pytest`, `unittest`, etc.).
 ---
 
-### 6. Implementação do script ETL em um Glue ELT (Infra As Code)
+### 6. Infra as Code
 #### Descrição
 - Baseado no script que voce desenvolveu na etapa de ETL desenvolva um script em Terraform que crie um Glue Job que irá rodar o script. Abaixo alguns parametros que o serviço deve ter.
 - Parametros
