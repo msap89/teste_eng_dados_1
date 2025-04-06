@@ -4,72 +4,67 @@
 
 O teste é destinado a avaliar as habilidades práticas como Engenheir@ de dados
 
-Itens avaliados:
-- ETL E Manipulação dos dados
-- Profundidade de Conhecimento no framework Apache Spark
-- Desenho de Arquitetura para ingestão de dados batch
-- Implementação de um Data quality
-- Desenvolvimento de testes unitários
-- Conhecimento em Infra as Code
--
+**Itens do teste:**
+1. ETL
+2. Análise dos dados
+3. Desenho de Arquitetura para ingestão de dados batch
+4. Implementação de um Data quality
+5. Desenvolvimento de testes unitários
+6. Infra as Code (IaC)
 
-Cada seção abaixo descreve uma tarefa específica que você deve completar.
-
-## Instruções para Fork
-
-Antes de começar, faça um **fork** deste repositório para sua conta pessoal no GitHub. Após completar todas as tarefas, crie um **Pull Request** para este repositório original. As suas soluções serão revisadas através deste PR.
 
 ## Desafios
 
-### 1. ETL e Manipulação de Dados
+### 1. ETL e Modelagem
 
 #### Descrição
 
-Utilize o arquivo `sales_data.csv` e:
+Utilize o arquivo `clientes_sinteticos.csv`.
 
-- Limpe os dados removendo linhas duplicadas e tratando valores ausentes.
-- Transforme o valor da venda de uma moeda fictícia para USD usando a taxa de conversão de 1 FICT = 0.75 USD.
-- Carregue os dados limpos e transformados em um banco de dados relacional.
+Deverá ser gerado um único script que irá escrever em 2 buckets da AWS, um deles Bronze e o outro Silver. O script deverá ser escrito visando a performance e facilidade em futuras manutenções. 
 
-### 2. Análise com Apache Spark(utilize PySpark ou Spark)
+Ambos os arquivos escritos no bucket Bronze e Silver devem estar acessíveis atraves do Glue Data Catalog, o schema de cata tabela pode ser definido por você mas considere que ambas as tabelas já foram criadas(nao a necessidade de criacao). A partição física devera ser a data de processamento e o nome da particao será **anomesdia**, lembre que além da partição física será necessario criar a partição lógica na tabela.
 
+Passos:
+- Especifique um schema para o dataset.
+- Trate os nomes dos clientes para que fique todos com letra maiuscula
+- Renomeie a coluna telefone_cliente para num_telefone_cliente
+- Realize a escrita do dado no bucket s3://bucket-bronze/tabela_cliente_landing
+- Deduplique o dataset mantendo sempre somente a ultima data de atualizacao do cadastro de cada cliente 
+- Trate a coluna de telefone de modo a permitir somente valores que sigam o padrao (NN)NNNNN-NNNN os demais devem ficar nulos
+-Realize a escrita do dado no bucket s3://bucket-silver/tb_cliente
+
+### 2. Análise dos dados
+
+Utilize o arquivo `clientes_sinteticos.csv`.
 #### Descrição
 
-Dado um conjunto fictício de logs `website_logs.csv`:
+- Identifique os 5 clientes que mais sofreram atualização na base.
+- Calcule a média de idade dos clientes.
 
-- Identifique as 10 páginas mais visitadas.
-- Calcule a média de duração das sessões dos usuários.
-- Determine quantos usuários retornam ao site mais de uma vez por semana.
 
 ### 3. Desenho de Arquitetura
 
 #### Descrição
 
-Proponha uma arquitetura em AWS para coletar dados de diferentes fontes:
+Proponha uma arquitetura em AWS para coletar dados de cadastros de clientes em um banco MySQL e persistir em um datalake que usa a arquitetura Medalhão:
 
-- Desenhe um sistema para coletar dados de uma API.
-- Processe esses dados em tempo real.
-- Armazene os dados para análise futura.
+- Desenhe um sistema para coletar dados do banco MySQL realizando CDC.
+- O processamento e escrita deve ser projetado para os 3 niveis do lake (bronze, silver e gold)
+- Além do armazenamento será necessario tambem uma governança de acesso aos dados a nivel de usuario
 
 
-### 5. Data Quality & Observability
+### 4. Data Quality & Observability
 
 #### Descrição
 
 A qualidade dos dados é fundamental para garantir que as análises e os insights derivados sejam confiáveis. Observabilidade, por outro lado, refere-se à capacidade de monitorar e entender o comportamento dos sistemas. Para este desafio:
 
-- Utilize o arquivo `sales_data.csv` e implemente verificações de qualidade de dados. Por exemplo:
-  - Verifique se todos os IDs de usuários são únicos.
-  - Confirme se os valores de vendas não são negativos.
-  - Garanta que todas as entradas tenham timestamps válidos.
-  - Quantidade de linhas ingeridas no banco de dados de sua escolha é igual a quantidade de linhas originais
-- Crie métricas de observabilidade para o processo ETL que você desenvolveu anteriormente(não é necessário implementação):
-  - Monitore o tempo que leva para os dados serem extraídos, transformados e carregados.
-  - Implemente alertas para qualquer falha ou anomalia durante o processo ETL.
-  - Descreva como você rastrearia um problema no pipeline, desde o alerta até a fonte do problema.
+- Considere que voce está implementando o processo de Qualidade dos dados na camada Silver do lake na tabela de clientes que você ja preparou anteriormente.
+- Crie um script de modo a validar as dimensoes de qualidade que voce julgue necessario para esse dataset.
 ---
 
-### 6. Teste Unitário
+### 5. Teste Unitário
 
 #### Descrição
 
@@ -81,19 +76,16 @@ Os testes unitários são fundamentais para garantir a robustez e confiabilidade
   - Casos de borda ou extremos.
   - Situações de erro ou exceção.
 - Utilize uma biblioteca de testes de sua escolha (como `pytest`, `unittest`, etc.).
-- Documente os resultados dos testes e, caso encontre falhas através dos testes, descreva como as corrigiria.
+---
 
-Dica: Valorizamos a cobertura de código, mas também a relevância e qualidade dos testes. Não é apenas sobre escrever muitos testes, mas sobre escrever testes significativos que garantam a confiabilidade do sistema.
-
-
-### 7. Implementação do script ETL em um Glue ELT (Infra As Code)
-XPTO
+### 6. Implementação do script ETL em um Glue ELT (Infra As Code)
 #### Descrição
-XPTO
-
-
-
-
+- Baseado no script que voce desenvolveu na etapa de ETL desenvovla um script em Terraform que crie um Glue Job de modo a rodar esse script spark. Abaixo alguns parametros que o serviço deve ter.
+- Parametros
+  - Versao: 5
+  - Workers: 10
+  - Tipo de Maquina: G1x
+  - Tag: Nome: projeto  valor: teste_eng_dados
 
 # O que é esperado do candidato
 
@@ -109,34 +101,32 @@ Esperamos que o código que você produza seja claro, legível e bem organizado.
 - Uso adequado de funções, classes e módulos.
 - Comentários relevantes.
 - Nomes significativos para variáveis e funções.
+- Performance utilizando o Framework Spark
 
 ## 3. Eficiência
 
-Enquanto a qualidade do código é importante, também estamos interessados em ver como você aborda problemas de eficiência. Considere a otimização de seu código, especialmente em tarefas que envolvem grandes conjuntos de dados.
+Mais do que apenas escrever um código funcional, é importante demonstrar preocupação com a eficiência. Leve em consideração a performance da sua solução, especialmente em cenários que envolvem grandes volumes de dados.
 
-## 4. Abordagem Analítica
 
-Queremos ver sua habilidade em transformar dados brutos em insights úteis. Isso não significa apenas escrever código, mas entender e interpretar os resultados.
+## 4. Familiaridade com Ferramentas e Tecnologias
 
-## 5. Conhecimento em Ferramentas e Plataformas
+Este desafio também tem o objetivo de verificar seu domínio sobre tecnologias como Apache Spark e AWS. Aproveite a oportunidade para mostrar como utiliza essas ferramentas na prática, de forma estratégica e eficaz.
 
-O teste foi desenhado para avaliar seu conhecimento em ferramentas específicas como Apache Spark e AWS. Mostre-nos que você sabe como usar essas ferramentas eficazmente para resolver problemas.
 
-## 6. Proposta de Solução
+## 6. Arquitetura de Solução
 
-Na seção de Desenho de Arquitetura, estamos interessados em sua capacidade de projetar sistemas robustos e escaláveis. Sua solução deve considerar aspectos como escalabilidade, resiliência, custo e manutenibilidade.
+Na parte de Arquitetura, queremos entender como você projeta sistemas que sejam robustos e preparados para escalar. Avaliaremos sua atenção a pontos como resiliência, custo-benefício, manutenção e crescimento da solução.
 
-## 7. Autonomia
 
-Embora esteja livre para pesquisar e procurar referências, queremos ver sua capacidade de trabalhar de forma autônoma e resolver problemas com os recursos que possui.
+## 7. Capacidade de Trabalhar de Forma Independente
+
+Você pode e deve consultar fontes externas, mas queremos ver como você se organiza, toma decisões e resolve problemas com os recursos disponíveis, demonstrando autonomia.
+
 
 ## 8. Comunicação
 
-Ao finalizar o teste, você será avaliado não apenas pelas soluções técnicas, mas também por sua capacidade de comunicar suas escolhas, decisões e resultados. Esteja preparado para justificar suas decisões e explicar seu raciocínio.
-
-Lembre-se, este teste não é apenas sobre acertar ou errar, mas sobre mostrar suas habilidades, abordagem e paixão pela Engenharia de Dados. Estamos ansiosos para ver o que você pode fazer!
+Além da parte técnica, valorizamos sua habilidade de explicar suas decisões. Ao final do teste, será importante justificar suas escolhas e descrever seu raciocínio de forma clara e objetiva.
+O propósito do teste vai além de respostas certas ou erradas. Queremos entender como você pensa, resolve problemas e se envolve com a área de Engenharia de Dados. Estamos empolgados para conhecer o seu trabalho!
 ---
 
-*"A excelência não é um destino, mas uma jornada contínua!"* - Brian Tracy
-
-Boa sorte! 🚀
+Boa sorte!
