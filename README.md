@@ -13,8 +13,7 @@ O teste é destinado a avaliar as habilidades práticas como Engenheir@ de dados
 6. Infra as Code (IaC)
 
 # Sugestão de estrutura dos arquivos de resposta
-
-.
+```bash
 ├── 1.ETL/
 │   └── script.py
 ├── 2.AnaliseDados/
@@ -29,7 +28,7 @@ O teste é destinado a avaliar as habilidades práticas como Engenheir@ de dados
 │   └── resultados.txt
 └── 6.InfraAsCode/
     └── script.tf
-
+ ```
 
 
 ## Desafios
