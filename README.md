@@ -12,6 +12,24 @@ O teste é destinado a avaliar as habilidades práticas como Engenheir@ de dados
 5. Desenvolvimento de testes unitários
 6. Infra as Code (IaC)
 
+# Sugestão de estrutura dos arquivos de resposta
+.
+├── 1.ETL/
+│   └── script.py
+├── 2.AnaliseDados/
+│   └── analise.txt
+├── 3.DesenhodeArquitetura/
+│   ├── desenho.jpg
+│   └── explicacao.txt
+├── 4.DataQuality/
+│   └── script_data_quality.py
+├── 5.TesteUnitario/
+│   ├── unit_test.py
+│   └── resultados.txt
+└── 6.InfraAsCode/
+    └── script.tf
+
+
 
 ## Desafios
 
@@ -21,7 +39,7 @@ O teste é destinado a avaliar as habilidades práticas como Engenheir@ de dados
 
 Utilize o arquivo `clientes_sinteticos.csv`.
 
-Deverá ser gerado um único script que irá escrever em 2 buckets da AWS, um deles Bronze e o outro Silver. O script deverá ser escrito visando a performance e facilidade em futuras manutenções. 
+Deverá ser gerado um único script que irá escrever em 2 buckets da AWS, um deles Bronze e o outro Silver.
 
 Ambos os arquivos escritos no bucket Bronze e Silver devem estar acessíveis atraves do Glue Data Catalog, o schema de cata tabela pode ser definido por você mas considere que ambas as tabelas já foram criadas(nao a necessidade de criacao). A partição física devera ser a data de processamento e o nome da particao será **anomesdia**, lembre que além da partição física será necessario criar a partição lógica na tabela.
 
@@ -32,14 +50,14 @@ Passos:
 - Realize a escrita do dado no bucket s3://bucket-bronze/tabela_cliente_landing
 - Deduplique o dataset mantendo sempre somente a ultima data de atualizacao do cadastro de cada cliente 
 - Trate a coluna de telefone de modo a permitir somente valores que sigam o padrao (NN)NNNNN-NNNN os demais devem ficar nulos
--Realize a escrita do dado no bucket s3://bucket-silver/tb_cliente
+- Realize a escrita do dado no bucket s3://bucket-silver/tb_cliente
 
 ### 2. Análise dos dados
 
 Utilize o arquivo `clientes_sinteticos.csv`.
 #### Descrição
 
-- Identifique os 5 clientes que mais sofreram atualização na base.
+- Identifique os 5 clientes que mais sofreram atuaatualizações na base.
 - Calcule a média de idade dos clientes.
 
 
@@ -47,18 +65,18 @@ Utilize o arquivo `clientes_sinteticos.csv`.
 
 #### Descrição
 
-Proponha uma arquitetura em AWS para coletar dados de cadastros de clientes em um banco MySQL e persistir em um datalake que usa a arquitetura Medalhão:
+Proponha uma arquitetura na AWS para coletar dados de cadastros de clientes em um banco MySQL. Esses dados devem ser persistidos em um datalake que usa a arquitetura medalhão:
 
 - Desenhe um sistema para coletar dados do banco MySQL realizando CDC.
 - O processamento e escrita deve ser projetado para os 3 niveis do lake (bronze, silver e gold)
-- Além do armazenamento será necessario tambem uma governança de acesso aos dados a nivel de usuario
+- Além do armazenamento do dado será necessaria uma governança de acesso a nivel de usuario
 
 
-### 4. Data Quality & Observability
+### 4. Data Quality
 
 #### Descrição
 
-A qualidade dos dados é fundamental para garantir que as análises e os insights derivados sejam confiáveis. Observabilidade, por outro lado, refere-se à capacidade de monitorar e entender o comportamento dos sistemas. Para este desafio:
+A qualidade dos dados é fundamental para garantir que as análises e os insights derivados sejam confiáveis. 
 
 - Considere que voce está implementando o processo de Qualidade dos dados na camada Silver do lake na tabela de clientes que você ja preparou anteriormente.
 - Crie um script de modo a validar as dimensoes de qualidade que voce julgue necessario para esse dataset.
@@ -80,12 +98,14 @@ Os testes unitários são fundamentais para garantir a robustez e confiabilidade
 
 ### 6. Implementação do script ETL em um Glue ELT (Infra As Code)
 #### Descrição
-- Baseado no script que voce desenvolveu na etapa de ETL desenvovla um script em Terraform que crie um Glue Job de modo a rodar esse script spark. Abaixo alguns parametros que o serviço deve ter.
+- Baseado no script que voce desenvolveu na etapa de ETL desenvolva um script em Terraform que crie um Glue Job que irá rodar o script. Abaixo alguns parametros que o serviço deve ter.
 - Parametros
   - Versao: 5
   - Workers: 10
   - Tipo de Maquina: G1x
   - Tag: Nome: projeto  valor: teste_eng_dados
+
+
 
 # O que é esperado do candidato
 
