@@ -60,7 +60,7 @@ Passos:
 Utilize o arquivo `clientes_sinteticos.csv`.
 #### Descrição
 
-- Identifique os 5 clientes que mais sofreram atuaatualizações na base.
+- Identifique os 5 clientes que mais sofreram atualizações na base.
 - Calcule a média de idade dos clientes.
 ---
 
@@ -72,7 +72,7 @@ Proponha uma arquitetura na AWS para coletar dados de cadastros de clientes em u
 
 - Desenhe um sistema para coletar dados do banco MySQL realizando CDC.
 - O processamento e escrita deve ser projetado para os 3 niveis do lake (bronze, silver e gold)
-- Além do armazenamento do dado será necessaria uma governança de acesso a nivel de usuario
+- Além do armazenamento do dado será necessaria uma governança de acesso a nível de usuário
 ---
 
 ### 4. Data Quality
@@ -82,7 +82,7 @@ Proponha uma arquitetura na AWS para coletar dados de cadastros de clientes em u
 A qualidade dos dados é fundamental para garantir que as análises e os insights derivados sejam confiáveis. 
 
 - Considere que voce está implementando o processo de Qualidade dos dados na camada Silver do lake na tabela de clientes que você ja preparou anteriormente.
-- Crie um script de modo a validar as dimensoes de qualidade que voce julgue necessario para esse dataset.
+- Crie um script de modo a validar as dimensões de qualidade que você julgue necessario para esse dataset.
 ---
 
 ### 5. Teste Unitário
@@ -104,13 +104,12 @@ Os testes unitários são fundamentais para garantir a robustez e confiabilidade
 - Desenvolva um script Terraform que crie um Glue Job. Abaixo alguns parametros que o serviço deve ter.
 - Parametros
   - Script : script desenvolvido na etapa 2
-  - Versao: 5
+  - Versão: 5
   - Workers: 10
-  - Tipo de Maquina: G1x
+  - Tipo de Máquina: G1x
   - Tag: 
-     
-     -Nome: projeto  
-     -Valor: teste_eng_dados
+     - Nome: projeto  
+     - Valor: teste_eng_dados
 
 
 
@@ -140,20 +139,21 @@ Mais do que apenas escrever um código funcional, é importante demonstrar preoc
 Este desafio também tem o objetivo de verificar seu domínio sobre tecnologias como Apache Spark e AWS. Aproveite a oportunidade para mostrar como utiliza essas ferramentas na prática, de forma estratégica e eficaz.
 
 
-## 6. Arquitetura de Solução
+## 5. Arquitetura de Solução
 
 Na parte de Arquitetura, queremos entender como você projeta sistemas que sejam robustos e preparados para escalar. Avaliaremos sua atenção a pontos como resiliência, custo-benefício, manutenção e crescimento da solução.
 
 
-## 7. Capacidade de Trabalhar de Forma Independente
+## 6. Capacidade de Trabalhar de Forma Independente
 
 Você pode e deve consultar fontes externas, mas queremos ver como você se organiza, toma decisões e resolve problemas com os recursos disponíveis, demonstrando autonomia.
 
 
-## 8. Comunicação
+## 7. Comunicação
 
 Além da parte técnica, valorizamos sua habilidade de explicar suas decisões. Ao final do teste, será importante justificar suas escolhas e descrever seu raciocínio de forma clara e objetiva.
 O propósito do teste vai além de respostas certas ou erradas. Queremos entender como você pensa, resolve problemas e se envolve com a área de Engenharia de Dados. Estamos empolgados para conhecer o seu trabalho!
+
 ---
 
 Boa sorte!
