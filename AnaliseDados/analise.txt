@@ -1,0 +1,42 @@
+# Etapa 2 – Análise de Dados
+
+## Introdução
+
+Este documento apresenta os resultados da análise realizada sobre o arquivo `clientes_sinteticos.csv`, utilizando as camadas Bronze e Silver do Data Lake.  
+
+Foram analisados:  
+- Os clientes que mais sofreram atualizações na base (utilizando a camada Bronze, que mantém o histórico completo).  
+- A média de idade dos clientes (utilizando a camada Silver, com dados tratados e deduplicados).
+
+---
+
+## Resultados
+
+### 1. Top 5 clientes com mais atualizações (a partir da Bronze):
+
+| cod_cliente | count |
+|-------------|-------|
+| 479         | 5     |
+| 396         | 5     |
+| 878         | 5     |
+| 855         | 4     |
+| 925         | 3     |
+
+Observa-se que os clientes com IDs 479, 396 e 878 são os que mais tiveram registros atualizados na base, indicando maior movimentação ou revisões de cadastro.
+
+---
+
+### 2. Média de idade dos clientes (a partir da Silver):
+
+| media_idade |
+|-------------|
+| 51.15       |
+
+A média de idade foi calculada considerando a diferença entre a data atual e a data de nascimento (`dt_nascimento_cliente`). O valor indica um perfil de clientes com idade média de aproximadamente 51 anos.
+
+---
+
+## Considerações Finais
+  
+- Todo o processamento foi realizado em PySpark.  
+- Esses resultados contribuem para uma melhor compreensão do comportamento da base de clientes e podem orientar decisões estratégicas futuras.
