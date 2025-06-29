@@ -84,4 +84,4 @@ A coluna `anomesdia` foi criada dinamicamente usando a data de processamento (`c
 
 ```bash
 ├── 1.ETL/
-│   ├── script_etl.py           # Código PySpark com toda a lógica de Bronze e Silver
+   └── script_etl.py           # Código PySpark com toda a lógica de Bronze e Silver
