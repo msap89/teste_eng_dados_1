@@ -85,3 +85,22 @@ A coluna `anomesdia` foi criada dinamicamente usando a data de processamento (`c
 ```bash
 ├── 1.ETL/
    └── script_etl.py           # Código PySpark com toda a lógica de Bronze e Silver
+```
+
+## 4. Validação de Qualidade dos Dados (Data Quality)
+
+A qualidade dos dados é fundamental para garantir a confiabilidade das análises e decisões derivadas do dataset de clientes. Nesta etapa, foi implementada a função `data_quality` que realiza validações importantes na camada Silver, como:
+
+- Verificação de valores nulos em colunas críticas (`cod_cliente`, `nm_cliente`, `dt_nascimento_cliente`, `dt_atualizacao`).
+- Detecção de clientes duplicados pelo código do cliente.
+- Identificação de valores negativos na coluna de renda.
+- Validação dos valores permitidos na coluna `tp_pessoa` (apenas "PF" ou "PJ").
+
+A função retorna um dicionário com indicadores booleanos que refletem o status da qualidade dos dados.
+
+## 5. Testes Unitários
+
+Para garantir a robustez da função de validação, foi desenvolvida uma suíte de testes unitários utilizando a biblioteca `pytest`. Os testes cobrem cenários positivos (dados válidos) e negativos (dados com problemas), assegurando que a função `data_quality` se comporte conforme esperado.
+
+A abordagem facilita a manutenção futura, possibilita integração com pipelines de CI/CD e contribui para a entrega de um pipeline confiável e de alta qualidade.
+
