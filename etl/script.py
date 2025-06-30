@@ -1,4 +1,9 @@
 # Databricks notebook source
+
+# MAGIC %run ../ETL/data_quality
+
+# COMMAND ----------
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, upper, regexp_extract, lit, date_format, row_number, current_date, when
 from pyspark.sql.window import Window
@@ -114,6 +119,13 @@ if DeltaTable.isDeltaTable(spark, silver_path):
 
 else:
     df_final.write.format("delta").partitionBy("anomesdia").mode("overwrite").save(silver_path)
+
+# COMMAND ----------
+
+# --------------------------------------
+# Validação da qualidade dos dados
+# --------------------------------------
+data_quality(df_final)
 
 # COMMAND ----------
 
