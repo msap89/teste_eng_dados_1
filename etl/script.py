@@ -1,7 +1,4 @@
 # Databricks notebook source
-pip install pytest --quiet
-
-# COMMAND ----------
 
 # MAGIC %run ../ETL/data_quality
 
