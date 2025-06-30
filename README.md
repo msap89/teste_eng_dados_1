@@ -129,6 +129,9 @@ A média de idade foi calculada considerando a diferença entre a data atual e a
 - Todo o processamento foi realizado em PySpark.  
 - Esses resultados contribuem para uma melhor compreensão do comportamento da base de clientes e podem orientar decisões estratégicas futuras.
 
+## 3. Desenho de Solução
+![image](https://github.com/user-attachments/assets/3069ecf9-8758-4325-b4ab-9effbdf3a781)
+
 
 ## 4. Validação de Qualidade dos Dados (Data Quality)
 
