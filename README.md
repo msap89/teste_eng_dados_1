@@ -129,9 +129,42 @@ A média de idade foi calculada considerando a diferença entre a data atual e a
 - Todo o processamento foi realizado em PySpark.  
 - Esses resultados contribuem para uma melhor compreensão do comportamento da base de clientes e podem orientar decisões estratégicas futuras.
 
-## 3. Desenho de Solução
-![image](https://github.com/user-attachments/assets/3069ecf9-8758-4325-b4ab-9effbdf3a781)
+## 3. Desenho de Arquitetura
+#### Descrição
 
+A arquitetura proposta visa capturar dados de cadastros de clientes hospedados em um banco **RDS MySQL**, realizar **CDC (Change Data Capture)** e armazená-los em um **Data Lake** estruturado no padrão **Medalhão (Bronze, Silver e Gold)**.
+
+---
+
+#### Arquitetura Proposta
+![image](https://github.com/user-attachments/assets/0c5980df-2276-4ffb-8d64-7febd3d58fe9)
+
+#### Componentes e Fluxo
+
+- **RDS MySQL**: origem dos dados transacionais.
+- **AWS DMS**: realiza CDC no banco MySQL e envia alterações para o Kinesis Data Streams.
+- **Kinesis Data Streams**: entrega eventos em tempo real para processamento.
+- **AWS Glue Streaming ETL**: consome os dados do Kinesis e realiza transformações mínimas, gravando na camada **Bronze**.
+- **Camada Bronze (S3)**: armazena os dados brutos com histórico completo.
+- **Athena**: permite análises exploratórias diretamente sobre os dados brutos da Bronze.
+- **AWS Glue Batch ETL**: transforma e limpa os dados da Bronze para Silver, e da Silver para Gold.
+  - **Silver**: dados deduplicados, validados e normalizados.
+  - **Gold**: dados agregados e modelados para consumo analítico.
+- **Amazon QuickSight**: ferramenta de visualização conectada diretamente à camada Gold.
+- **Governança com Lake Formation + Glue Data Catalog**:
+  - **Lake Formation** gerencia permissões de acesso a dados no nível de usuário e coluna.
+  - **Glue Data Catalog** armazena os metadados de todas as tabelas do lake.
+
+---
+
+#### Benefícios
+
+- Arquitetura escalável, segura e real-time.
+- Segregação clara de responsabilidades por camada (Medalhão).
+- Governança completa com controle de acesso e catalogação.
+- Permite tanto exploração ad-hoc quanto painéis analíticos empresariais.
+
+---
 
 ## 4. Validação de Qualidade dos Dados (Data Quality)
 
