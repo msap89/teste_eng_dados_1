@@ -41,3 +41,14 @@ def test_valores_invalidos(spark):
     assert not result["sem_duplicados"]
     assert not result["renda_valida"]
     assert not result["tp_pessoa_valida"]
+
+def test_dataframe_vazio(spark):
+    schema = ["cod_cliente", "nm_cliente", "dt_nascimento_cliente", "dt_atualizacao", "tp_pessoa", "vl_renda"]
+    df = spark.createDataFrame([], schema)
+
+    result = data_quality(df)
+
+    assert result["colunas_criticas_sem_nulos"]
+    assert result["sem_duplicados"]
+    assert result["renda_valida"]
+    assert result["tp_pessoa_valida"]
