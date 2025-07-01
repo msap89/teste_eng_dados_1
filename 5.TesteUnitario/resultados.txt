@@ -1,15 +1,17 @@
 ============================= test session starts =============================
 platform linux -- Python 3.9.13, pytest-7.1.2, pluggy-1.0.0
 rootdir: /Workspace/Users/mario89sergio@gmail.com/5.TesteUnitario
-collected 2 items
+collected 3 items
 
-unit_test.py::test_valores_validos PASSED                               [ 50%]
-unit_test.py::test_valores_invalidos PASSED                             [100%]
+unit_test.py::test_valores_validos PASSED                              [ 33%]
+unit_test.py::test_valores_invalidos PASSED                            [ 66%]
+unit_test.py::test_dataframe_vazio PASSED                              [100%]
 
-============================== 2 passed in 0.47s ==============================
+============================== 3 passed in 0.51s ==============================
 
 Resumo:
-test_valores_validos: passou — Validação com dados consistentes.
-test_valores_invalidos: passou — Validação de falhas esperadas em dados com problemas.
+atest_valores_validos: passou — Validação com dados consistentes.
+test_valores_invalidos: passou — Identificou corretamente nulos, duplicados, renda negativa e tipo de pessoa inválido.
+test_dataframe_vazio: passou — Tratamento correto para DataFrame vazio sem gerar erros.
 
 Todos os testes unitários foram executados com sucesso.
